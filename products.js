@@ -19,12 +19,16 @@ const Product = mongoose.model ("Product", {
         weight: Number,
         dob: Date,
         height: Number,
-        gender: String,
+        gender: {type: String, enum: ["Male", "Female"]},
         phrase: String,
-        specialrqst: String,
+        size: {type: String, enum: ["Male", "Female"]},
+        color: {type: String, enum: ["White", "Black"]},
+        font:{type: String, enum: [""]},
+        specialrqst: String
     }],
     dimentions: {type: Number, required: true},
     weight: {type: Number, required: true},
+    image: [String]
 });
 
 

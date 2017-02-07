@@ -2,12 +2,12 @@
  * Mongoose schema and model for Products collection.
  */
 
-const config = require('config');
+const config = require("./config");
 const bluebird = require('bluebird');
 // Import Mongoose schema and connect to DB
 const mongoose = require('mongoose');
 mongoose.promise = bluebird;
-mongoose.connect(confi.mongoConfigs.testDb);
+mongoose.connect(config.db);
 
 // Create a schema
 const Schema = mongoose.Schema;

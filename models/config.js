@@ -4,7 +4,11 @@
 
 // Use for localhost testing.
 const mongoConfigs = {
-    testDb: 'mongodb://localhost/ecommtest'
+    // Test DB
+    db: 'mongodb://localhost/ecommtest'
+    // Other DBs
+    //...
 };
+console.log("test");
 
 module.exports = mongoConfigs;

@@ -1,27 +1,26 @@
+'use strict';
 /**
  * Mongoose schema and model for Users collection
  */
 
-const config = require("config");
+const config = require("./config");
 const bcrypt = require('bcrypt');
 const bluebird = require('bluebird');
 // Import mongoose ORM and connect to DB
 const mongoose = require("mongoose");
-mongoose.promise = bluebird;
-mongoose.connect(config.mongoConfigs.testDb);
+mongoose.Promise = bluebird;
+mongoose.connect(config.db);
 
 // Create a schema
 const Schema = mongoose.Schema;
 
 // Define the user schema
 const userSchema = new Schema({
-   name:[{
-       first: { type: String, required: true },
-       last: {type: String, required: true },
-   }],
-   email: {type: String, required: true},
-   password: { type: String, required: true },
-   address: [{
+    fName: { type: String, required: true },
+    lName: {type: String, required: true },
+    email: {type: String, required: true, unique: true },
+    password: { type: String, required: true },
+    address: [{
         name: { type: String, required: true },
         line1: { type: String, required: true },
         line2: { type: String, required: false },
@@ -29,25 +28,49 @@ const userSchema = new Schema({
         state: { type: String, required: true },
         zip: { type: String, required: true }
     }],
-    createdAt: { type: Date, required: true },
-    lastUpdated: { type: Date, required: true }
-});
-
-// User auth instance method sets password to hash
-userSchema.statics.hashPassword = (password) => {
-    const saltRounds = 10;
-    bcrypt.hash(password, saltRounds, (err, hash) => {
-        if(err) {
-            // To-Do: better error handling
-            console.log("bCrypt hash error - password not saved");
-        }
-        
-    })
-}
-
-
+        createdAt: { type: Date, required: true },
+        lastUpdated: { type: Date, required: true }
+    });
 
 // Create a User model with defined schema
 const User = mongoose.model("User", userSchema);
 
-module.exports = User;
+// User auth instance method sets password to hash
+const hashAndSave = (user, req, res, next) => {
+    const saltRounds = 10;
+    // Add other validation? look into validateBeforeSave
+    bcrypt.hash(user.password, saltRounds, (err, hash) => {
+        if(err) {
+            // To-Do: better error handling
+            console.log("bCrypt hash error - password not saved");
+        }
+        user.password = hash;
+        user.save()
+            .then((result) => {
+                res.json({
+                    "message": "User saved successfully",
+                    "data": result
+                });
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    });
+};
+
+const createUser = (req, res, next) => {
+    let newUser = new User();
+    newUser.fName = req.body.fName;
+    newUser.lName = req.body.lName;
+    newUser.email = req.body.email;
+    newUser.password = req.body.password;
+    newUser.address = req.body.address;
+    newUser.createdAt = new Date();
+    newUser.lastUpdated = newUser.createdAt;
+    hashAndSave(newUser, req, res, next);
+};
+
+module.exports = {
+    "User": User,
+    "createUser": createUser
+};

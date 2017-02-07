@@ -8,7 +8,6 @@ const bcrypt = require('bcrypt');
 const bluebird = require('bluebird');
 const uuid = require('uuid/v4');
 
-
 // Import mongoose ORM and connect to DB
 const mongoose = require("mongoose");
 mongoose.Promise = bluebird;
@@ -45,23 +44,27 @@ const hashAndSave = (user, callback) => {
     bcrypt.hash(user.password, saltRounds, (err, hash) => {
         if(err) {
             // To-Do: better error handling
-            console.log("bCrypt hash error - password not saved");
+            console.log(err);
         }
         user.password = hash;
         user.save()
-            // .then(callback({
-            //         "message": "User saved successfully",
-            //         "data": result,
-            //         "success": true
-            //     })
-            // )
-            .then((result) => { console.log(results) })
+            .then((result) => { 
+                callback({
+                    "data": result,
+                    success:true,
+                    message:"user created"
+                });
+            })
             .catch((err) => {
                 console.log(err);
+                callback({
+                    "data": "",
+                    success: false,
+                    message: "server error - user not saved"
+                });
             });
     });
 };
-
 
 const createUser = (req, res, next) => {
     let newUser = new User();
@@ -73,19 +76,7 @@ const createUser = (req, res, next) => {
     newUser.createdAt = new Date();
     newUser.lastUpdated = newUser.createdAt;
     hashAndSave(newUser, (result) => {
-        if (result.success) {
-            res.json({
-                "message": result.message,
-                "data": result.data,
-                "success": "true"
-            });
-        } else {
-            res.json({
-                "message": "Server Error: user not saved",
-                "data": result.data,
-                "success": "false"
-            })
-        }
+        res.json(result);
     });
 };
 
@@ -112,14 +103,12 @@ const loginUser = (req, res, next) =>{
 const auth = (req, res, next)=>{
     console.log(req.body.token, req.get.token, req.session.token);
     if (typeof req.session.token !== "undefined" && (req.body.token === req.session.token || req.get.token === req.session.token)){
-        console.log("logged in or something")
         next();
     } else {
         res.status(401);
-        res.json({ error: "You're not logged in lollololololol rofl" });
+        res.json({ message: "Error: could not log in" });
     }
 }
-
 
 const updateUser = (req, res, next) => {
     console.log()
@@ -145,8 +134,6 @@ const updateUser = (req, res, next) => {
             }
     });   
 }; 
-
-
 
 module.exports = {
     "User": User,

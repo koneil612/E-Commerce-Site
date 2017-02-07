@@ -16,7 +16,7 @@ mongoose.connect(config.mongoConfigs.db);
 // Create a schema
 const Schema = mongoose.Schema;
 
-// Define the user schema
+// Define the user schema'
 const userSchema = new Schema({
     fName: { type: String, required: true },
     lName: {type: String, required: true },

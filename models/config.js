@@ -9,6 +9,9 @@ const mongoConfigs = {
     // Other DBs
     //...
 };
-console.log("test");
 
-module.exports = mongoConfigs;
+const secrets = {
+    sessSecret: "e9a6e3f5-6bb3-47e1-ab86-a3a3c066abb5"
+};
+console.log(secrets);
+module.exports = {mongoConfigs: mongoConfigs, secrets: secrets};

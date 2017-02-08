@@ -88,9 +88,10 @@ const loginUser = (req, res, next) =>{
                     const token = uuid();
                     req.session.token = token;
                     req.session.userId = result._id;
+                    req.session.products = [];
                     res.json ({
                         "message" : "You're logged in",
-                        token : token
+                        "token" : token
                     })
 
                 } else {
@@ -106,7 +107,7 @@ const auth = (req, res, next)=>{
         next();
     } else {
         res.status(401);
-        res.json({ message: "Error: could not log in" });
+        res.json({ "message": "Error: could not log in" });
     }
 }
 

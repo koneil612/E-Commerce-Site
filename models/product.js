@@ -19,7 +19,7 @@ const productSchema = new Schema({
     price: {type: Number, required: true},
     description: {type: Number, required: true},
     quanity: Number,
-    customization: [{
+    customization: {
         fname: String,
         mname: String,
         lname: String,
@@ -32,12 +32,40 @@ const productSchema = new Schema({
         color: {type: String, enum: ["White", "Black"]},
         font:{type: String, enum: [""]},
         specialrqst: String
-    }],
-    dimentions: {type: Number, required: true},
-    weight: {type: Number, required: true},
+    },
     image: [String]
 });
 
 const Product = mongoose.model('Product', productSchema);
 
-module.exports = Product;
+const addToCart = (req, res, next) => {
+        // Find product by ID
+        Product.findOne({_id: req.body.productId})
+                .then((result) => {
+                        req.session.products.push({
+                                productId: result._id,
+                                productCustomization: req.body.customization,
+                                quantity: req.body.quantity
+                        });
+                        res.status(200);
+                        res.json({
+                                "message": "Product added to cart",
+                                "success": true,
+                                "data": result
+                        });
+                })
+                .catch((err) => {
+                        res.status(500);
+                        res.json({
+                                "message": "Something went wrong",
+                                "success": false
+                        });
+                });
+        // Get quantity, product customizations
+        // Add to session
+}
+
+module.exports = {
+        "Product": Product,
+        "addToCart": addToCart
+};

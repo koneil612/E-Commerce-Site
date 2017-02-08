@@ -11,7 +11,7 @@ const uuid = require('uuid/v4');
 // Import mongoose ORM and connect to DB
 const mongoose = require("mongoose");
 mongoose.Promise = bluebird;
-mongoose.connect(config.mongoConfigs.db);
+
 
 // Create a schema
 const Schema = mongoose.Schema;
@@ -47,8 +47,10 @@ const hashAndSave = (user, callback) => {
             console.log(err);
         }
         user.password = hash;
+        mongoose.connect(config.mongoConfigs.db);
         user.save()
-            .then((result) => { 
+            .then((result) => {
+                mongoose.disconnect();
                 callback({
                     "data": result,
                     success:true,
@@ -56,6 +58,7 @@ const hashAndSave = (user, callback) => {
                 });
             })
             .catch((err) => {
+                mongoose.disconnect();
                 console.log(err);
                 callback({
                     "data": "",
@@ -81,10 +84,12 @@ const createUser = (req, res, next) => {
 };
 
 const loginUser = (req, res, next) =>{
-    User.findOne({email: req.body.email}) 
+    mongoose.connect(config.mongoConfigs.db);
+    User.findOne({email: req.body.email})
         .then(function(result){
+            mongoose.disconnect();
             bcrypt.compare(req.body.password, result.password, function(err, resolve){
-                if (resolve === true) { 
+                if (resolve === true) {
                     const token = uuid();
                     req.session.token = token;
                     req.session.userId = result._id;
@@ -98,7 +103,7 @@ const loginUser = (req, res, next) =>{
                     res.json ({ "message": "login failed, try again"})
                 }
             });
-        }) 
+        })
 };
 
 const auth = (req, res, next)=>{
@@ -113,15 +118,15 @@ const auth = (req, res, next)=>{
 
 const updateUser = (req, res, next) => {
     console.log()
-    User.findOneAndUpdate({ _id: req.session.userId }, { $set: 
+    User.findOneAndUpdate({ _id: req.session.userId }, { $set:
         {
-            fName: req.body.fName, 
+            fName: req.body.fName,
             lName: req.body.lName,
             email: req.body.email,
             address: req.body.address,
             lastUpdated: new Date()
         }
-    }, 
+    },
     { new: true }, function(err, result) {
             if (err) {
                 res.json({
@@ -133,8 +138,8 @@ const updateUser = (req, res, next) => {
                 "data": result
                 });
             }
-    });   
-}; 
+    });
+};
 
 module.exports = {
     "User": User,

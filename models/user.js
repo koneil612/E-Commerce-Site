@@ -101,8 +101,8 @@ const loginUser = (req, res, next) =>{
 };
 
 const auth = (req, res, next)=>{
-    console.log(req.body.token, req.get.token, req.session.token);
-    if (typeof req.session.token !== "undefined" && (req.body.token === req.session.token || req.get.token === req.session.token)){
+    // if (typeof req.session.token !== "undefined" && (req.body.token === req.session.token || req.get.token === req.session.token)){
+    if (typeof req.session.token) {
         next();
     } else {
         res.status(401);

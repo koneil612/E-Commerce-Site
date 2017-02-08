@@ -28,7 +28,7 @@ const productSchema = new Schema({
         height: Number,
         gender: String,
         phrase: String,
-        specialrqst: String,
+        specialrqst: String
     }],
     dimentions: {type: Number, required: true},
     weight: {type: Number, required: true}

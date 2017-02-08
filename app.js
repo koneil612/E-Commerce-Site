@@ -8,6 +8,7 @@ const session = require('express-session');
 
 const config = require("./models/config");
 
+
 const sess = {
     secret: config.secrets.sessSecret,
     cookie: {maxAge: 60000}
@@ -19,6 +20,7 @@ const api = require('./routes/api');
 app.use(session(sess));
 app.use(bodyParser.json());
 app.use('/api', api);
+// app.set('schema',Schema);
 
 // Start up localhost server
 app.listen(3000, () => {

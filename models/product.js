@@ -7,7 +7,7 @@ const bluebird = require('bluebird');
 // Import Mongoose schema and connect to DB
 const mongoose = require('mongoose');
 mongoose.promise = bluebird;
-mongoose.connect(config.db);
+
 
 // Create a schema
 const Schema = mongoose.Schema;
@@ -40,8 +40,10 @@ const Product = mongoose.model('Product', productSchema);
 
 const addToCart = (req, res, next) => {
         // Find product by ID
+        mongoose.connect(config.db);
         Product.findOne({_id: req.body.productId})
                 .then((result) => {
+                        mongoose.disconnect();
                         req.session.products.push({
                                 productId: result._id,
                                 productCustomization: req.body.customization,

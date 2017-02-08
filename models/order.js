@@ -4,7 +4,7 @@
 
 const config = require("./config");
 const bluebird = require("bluebird");
-// Import mongoose ORM and connect to DB 
+Import mongoose ORM and connect to DB
 const mongoose = require("mongoose");
 mongoose.promise = bluebird;
 mongoose.connect(config.db);
@@ -28,7 +28,7 @@ const orderSchema = new Schema({
         quantity: { type: Number, required: true }
     }],
     status: {
-        type: String, 
+        type: String,
         enum: ["processing", "packed", "shipped", "delivered",
             "return requested", "return complete"],
         required: true

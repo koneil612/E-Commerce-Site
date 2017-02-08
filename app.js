@@ -11,7 +11,7 @@ const config = require("./models/config");
 
 const sess = {
     secret: config.secrets.sessSecret,
-    cookie: {maxAge: 60000}
+    cookie: {maxAge: 120000}
 }
 
 // Define API routes and mount router middleware to /api endpoint

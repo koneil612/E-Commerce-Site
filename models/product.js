@@ -8,7 +8,6 @@ const bluebird = require('bluebird');
 const mongoose = require('mongoose');
 mongoose.promise = bluebird;
 
-
 // Create a schema
 const Schema = mongoose.Schema;
 
@@ -40,7 +39,8 @@ const Product = mongoose.model('Product', productSchema);
 
 const addToCart = (req, res, next) => {
         // Find product by ID
-        mongoose.connect(config.db);
+        console.log("Adding new product!");
+        mongoose.connect(config.mongoConfigs.db);
         Product.findOne({_id: req.body.productId})
                 .then((result) => {
                         mongoose.disconnect();
@@ -57,6 +57,7 @@ const addToCart = (req, res, next) => {
                         });
                 })
                 .catch((err) => {
+                        mongoose.disconnect();
                         res.status(500);
                         res.json({
                                 "message": "Something went wrong",

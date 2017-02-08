@@ -12,7 +12,6 @@ const uuid = require('uuid/v4');
 const mongoose = require("mongoose");
 mongoose.Promise = bluebird;
 
-
 // Create a schema
 const Schema = mongoose.Schema;
 
@@ -104,11 +103,12 @@ const loginUser = (req, res, next) =>{
                 }
             });
         })
+        //To-Do: .catch()
 };
 
 const auth = (req, res, next)=>{
     // if (typeof req.session.token !== "undefined" && (req.body.token === req.session.token || req.get.token === req.session.token)){
-    if (typeof req.session.token) {
+    if (req.session.token) {
         next();
     } else {
         res.status(401);
@@ -117,7 +117,7 @@ const auth = (req, res, next)=>{
 }
 
 const updateUser = (req, res, next) => {
-    console.log()
+    mongoose.connect(config.mongoConfigs.db);
     User.findOneAndUpdate({ _id: req.session.userId }, { $set:
         {
             fName: req.body.fName,
@@ -128,6 +128,7 @@ const updateUser = (req, res, next) => {
         }
     },
     { new: true }, function(err, result) {
+            mongoose.disconnect();
             if (err) {
                 res.json({
                     "message": "update not successful"

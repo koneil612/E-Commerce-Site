@@ -4,10 +4,10 @@
 
 const config = require("./config");
 const bluebird = require("bluebird");
-Import mongoose ORM and connect to DB
+// Import mongoose ORM and connect to DB
 const mongoose = require("mongoose");
 mongoose.promise = bluebird;
-mongoose.connect(config.db);
+// mongoose.connect(config.db);
 
 // Create a schema
 const Schema = mongoose.Schema;

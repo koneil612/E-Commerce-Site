@@ -13,7 +13,7 @@ router.post('/user/update', user.auth, user.updateUser);
 router.post('/user/login', user.loginUser);
 
 router.post('/cart', user.auth, product.addToCart);
-router.get('/cart', user.auth, product.addToCart);
+// router.get('/cart', user.auth, product.addToCart);
 
-router.post('/cart/checkout', user.auth, product.checkOut);
+// router.post('/cart/checkout', user.auth, product.checkOut);
 module.exports = router;

@@ -15,5 +15,14 @@
     "express-session": "^1.15.0",
     "mongoose": "^4.8.1",
     "uuid": "^3.0.1"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/koneil612/E-Commerce-Site.git"
+  },
+  "bugs": {
+    "url": "https://github.com/koneil612/E-Commerce-Site/issues"
+  },
+  "homepage": "https://github.com/koneil612/E-Commerce-Site#readme"
 }

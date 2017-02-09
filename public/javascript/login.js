@@ -19,9 +19,9 @@ $(() => {
                 }
             },
             error: () => showLoginError()
-        })
-    })
-})
+        });
+    });
+});
 
 const showLoginError = (() => {
     const messageList = $("ul#messages-list");

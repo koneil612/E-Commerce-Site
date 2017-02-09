@@ -43,6 +43,9 @@ const addToCart = (req, res, next) => {
         Product.findOne({_id: req.body.productId})
                 .then((result) => {
                         mongoose.disconnect();
+                        if (!req.session.products) {
+                                req.session.products = [];
+                        }
                         req.session.products.push({
                                 product: result,
                                 customization: req.body.customization,

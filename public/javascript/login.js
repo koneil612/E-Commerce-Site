@@ -13,8 +13,9 @@ $(() => {
             "data": formData,
             "dataType": 'json',
             "encode": true,
-            success: () => {
-                window.location.replace("/");
+            success: (response) => {
+                console.log(response);
+                // window.location.replace("/");
             }
         })
     })

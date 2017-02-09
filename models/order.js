@@ -59,4 +59,40 @@ const orderSchema = new Schema({
 // Create Order model with defined schema
 const Order = mongoose.model("Order", orderSchema);
 
-module.exports = Order;
+const createOrder = (req, res, next ) => {
+    let newOrder = new Order(); 
+    newOrder.customerOrderNumber = req.session.customerOrderNumber;
+    newOrder.userId = req.session.userId;
+    newOrder.products = req.session.products;
+    newOrder.status = req.session.status;
+    newOrder.shippingType = req.session.shippingType;
+    newOrder.trackingNumber = req.session.trackingNumber;
+    newOrder.subTotal = Number(req.session.subTotal);
+    (req.session.state === "TX" ? newOrder.tax = newOrder.subTotal * .0825 :
+        newOrder.tax = 0);
+    newOrder.chargedTotal = newOrder.subTotal + newOrder.tax; 
+    mongoose.connect(config.mongoConfigs.db);
+    console.log(newOrder);
+    newOrder.save()
+        .then((result) => {
+            mongoose.disconnect();
+            res.status(200);
+            res.json({
+                "message": "your order has been saved",
+                "success": true,
+                "data": result
+            });
+        })
+        .catch ((err) => {
+            mongoose.disconnect();
+            console.log(err);
+            res.status(500);
+            res.json({
+                "message":"nah, it didn't work"
+            });
+        });
+};
+
+module.exports = {
+    "Order" : Order, 
+    "createOrder" : createOrder}

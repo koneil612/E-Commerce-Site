@@ -85,7 +85,7 @@ const createUser = (req, res, next) => {
 const loginUser = (req, res, next) =>{
     mongoose.connect(config.mongoConfigs.db);
     User.findOne({email: req.body.email})
-        .then(function(result){
+        .then((result) => {
             mongoose.disconnect();
             bcrypt.compare(req.body.password, result.password, function(err, resolve){
                 if (resolve === true) {
@@ -93,6 +93,7 @@ const loginUser = (req, res, next) =>{
                     req.session.token = token;
                     req.session.userId = result._id;
                     req.session.products = [];
+                    req.session.state = result.address[0].state;
                     res.json ({
                         "message" : "You're logged in",
                         "token" : token

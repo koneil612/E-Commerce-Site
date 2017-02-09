@@ -39,7 +39,6 @@ const Product = mongoose.model('Product', productSchema);
 
 const addToCart = (req, res, next) => {
         // Find product by ID
-        console.log("Adding new product!");
         mongoose.connect(config.mongoConfigs.db);
         Product.findOne({_id: req.body.productId})
                 .then((result) => {

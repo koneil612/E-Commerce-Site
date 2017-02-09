@@ -24,7 +24,6 @@ app.use(bodyParser.urlencoded());
 app.use('/api', api);
 app.use('/', client);
 app.set('view engine', 'hbs');
-// app.set('schema',Schema);
 
 // Start up localhost server
 app.listen(3000, () => {

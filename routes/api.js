@@ -19,4 +19,5 @@ router.get('/products/:productId', product.viewProduct);
 router.route('/cart/checkout')
     .get(user.auth, order.getCart)
     .post(user.auth, order.createOrder);
+
 module.exports = router;

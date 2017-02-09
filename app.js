@@ -16,10 +16,15 @@ const sess = {
 
 // Define API routes and mount router middleware to /api endpoint
 const api = require('./routes/api');
+const client = require('./routes/client');
 
+app.use(express.static('public'));
 app.use(session(sess));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded());
 app.use('/api', api);
+app.use('/', client);
+app.set('view engine', 'hbs');
 // app.set('schema',Schema);
 
 // Start up localhost server

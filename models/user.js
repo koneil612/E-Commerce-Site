@@ -87,27 +87,36 @@ const loginUser = (req, res, next) =>{
     User.findOne({email: req.body.email})
         .then((result) => {
             mongoose.disconnect();
-            bcrypt.compare(req.body.password, result.password, function(err, resolve){
-                if (resolve === true) {
-                    const token = uuid();
-                    req.session.token = token;
-                    req.session.userId = result._id;
-                    req.session.products = [];
-                    res.json ({
-                        "message" : "You're logged in",
-                        "token" : token
-                    })
-
-                } else {
-                    res.json ({ "message": "login failed, try again"})
-                }
-            });
+                bcrypt.compare(req.body.password, result.password, function(err, resolve){
+                    if (resolve === true) {
+                        const token = uuid();
+                        req.session.token = token;
+                        req.session.userId = result._id;
+                        req.session.products = [];
+                        res.json ({
+                            "message" : "You're logged in",
+                            "token" : token
+                        });
+                    } else {
+                        res.status(401);
+                        res.json({
+                            "message": "login failed",
+                            "success": false
+                        });
+                    }
+                });
         })
-        //To-Do: .catch()
+        .catch((err) => {
+            console.log(err);
+            res.status(401);
+            res.json({
+                "message": "login failed",
+                "success": false
+            });
+        });
 };
 
 const auth = (req, res, next)=>{
-    // if (typeof req.session.token !== "undefined" && (req.body.token === req.session.token || req.get.token === req.session.token)){
     if (req.session.token) {
         next();
     } else {

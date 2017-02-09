@@ -4,11 +4,8 @@
 
 const config = require("./config");
 const bluebird = require("bluebird");
-<<<<<<< Updated upstream
 // Import mongoose ORM and connect to DB
-=======
 //Import mongoose ORM and connect to DB
->>>>>>> Stashed changes
 const mongoose = require("mongoose");
 mongoose.promise = bluebird;
 // mongoose.connect(config.db);

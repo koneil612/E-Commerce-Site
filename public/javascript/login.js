@@ -2,8 +2,8 @@ $(() => {
     $("form.login").submit((event) => {
         event.preventDefault();
         const formData = {
-            "email": $("input#email-input").val(),
-            "password": $("input#password-input").val()
+            "email": $("input#email-login").val(),
+            "password": $("input#password-login").val()
         };
         $.ajax({
             "type": "POST",
@@ -24,7 +24,7 @@ $(() => {
 });
 
 const showLoginError = (() => {
-    const messageList = $("ul#messages-list");
-    messageList.remove("li.message");
-    messageList.append("<li class='message'>Login failed, please try again.</li>");
+    const messageListItem = $("li#message");
+    messageListItem.empty();
+    messageListItem.text("Login failed, please try again.");
 })

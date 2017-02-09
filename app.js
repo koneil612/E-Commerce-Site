@@ -8,7 +8,6 @@ const session = require('express-session');
 
 const config = require("./models/config");
 
-
 const sess = {
     secret: config.secrets.sessSecret,
     cookie: {maxAge: 1800000} // 30 mins

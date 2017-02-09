@@ -24,6 +24,7 @@ $(() => {
             success: (response) => {
                 if (response.success === true) {
                     $("div.signup-form-content-row").hide();
+                    $("div.login-form-content-row").show();
                     showSignupStatus(response);
                 } else {
                     showSignupStatus(response);
@@ -35,7 +36,9 @@ $(() => {
 });
 
 const showSignupStatus = ((response) => {
+    const messageListItem = $("li#message");
     const msg = (response.message ? response.message : "Couldn't create account. Please check your info and try again.");
-    $("li.message").remove();
-    $("ul#messages-list").append("<li class='message'>" + msg + "</li>");
+    $("div.messages").show();
+    messageListItem.empty();
+    messageListItem.text(msg);
 });

@@ -68,9 +68,43 @@ const addToCart = (req, res, next) => {
                                 "success": false
                         });
                 });
-}
+
+        // Get quantity, product customizations
+        // Add to session
+};
+
+const viewAll = (req, res, next) => {
+    // find all products
+    mongoose.connect(config.mongoConfigs.db);
+    Product.find({})
+        .then((result) => {
+            mongoose.disconnect();
+            res.json({
+            "message": "Product page",
+            "success": true,
+            "Products": result
+            });
+        });
+};
+
+const viewProduct = (req, res, next) => {
+    // find products
+    mongoose.connect(config.mongoConfigs.db);
+    Product.findOne({_id: req.params.productId})
+        .then((result) => {
+            mongoose.disconnect();
+            console.log(result);
+            res.json({
+            "message": "Product",
+            "success": true,
+            "product": result
+            });
+        });
+};
 
 module.exports = {
         "Product": Product,
-        "addToCart": addToCart
+        "addToCart": addToCart,
+        "viewAll": viewAll,
+        "viewProduct": viewProduct
 };

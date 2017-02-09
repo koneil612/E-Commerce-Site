@@ -59,18 +59,15 @@ const hashAndSave = (user, callback) => {
             }
             if (result) {
                 mongoose.disconnect();
-                console.log("user exists");
                 callback({
                     "data": result,
                     "success": false,
                     "message":"User already exists"
                 });
             }
-            if (!result) {
-                console.log("creating user...");
+            if (!result) {                
                 user.save()
-                    .then((result) => {
-                        console.log("user saved!");
+                    .then((result) => {                        
                         mongoose.disconnect();
                         callback({
                             "data": result,

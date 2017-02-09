@@ -22,13 +22,10 @@ $(() => {
             "dataType": 'json',
             "encode": true,
             success: (response) => {
-                console.log("post successful!");
                 if (response.success === true) {
-                    console.log("post responded with success!");
                     $("div.signup-form-content-row").hide();
                     showSignupStatus(response);
                 } else {
-                    console.log("post responded with fail!");
                     showSignupStatus(response);
                 }
             },

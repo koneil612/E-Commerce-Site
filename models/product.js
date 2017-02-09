@@ -44,19 +44,21 @@ const addToCart = (req, res, next) => {
                 .then((result) => {
                         mongoose.disconnect();
                         req.session.products.push({
-                                productId: result._id,
-                                productCustomization: req.body.customization,
-                                quantity: req.body.quantity
+                                product: result,
+                                customization: req.body.customization,
+                                quantity: Number(req.body.quantity)
                         });
                         res.status(200);
                         res.json({
                                 "message": "Product added to cart",
                                 "success": true,
-                                "data": result
+                                "rawProduct": result,
+                                "customization": req.body.customization
                         });
                 })
                 .catch((err) => {
                         mongoose.disconnect();
+                        console.log(err);
                         res.status(500);
                         res.json({
                                 "message": "Something went wrong",

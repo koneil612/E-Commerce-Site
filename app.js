@@ -11,8 +11,8 @@ const config = require("./models/config");
 
 const sess = {
     secret: config.secrets.sessSecret,
-    cookie: {maxAge: 120000}
-}
+    cookie: {maxAge: 1800000} // 30 mins
+};
 
 // Define API routes and mount router middleware to /api endpoint
 const api = require('./routes/api');

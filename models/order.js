@@ -15,16 +15,16 @@ const Schema = mongoose.Schema;
 // Define order schema
 const orderSchema = new Schema({
     customerOrderNumber: {
-        type: Number,
+        type: String,
         required: true,
         unique: true
     },
-    userID: {
+    userId: {
         type: String,
         required: true
     },
     products: [{
-        product: { type: Mixed, required:  true },
+        product: { type: Schema.Types.Mixed, required:  true },
         quantity: { type: Number, required: true }
     }],
     status: {
@@ -37,6 +37,10 @@ const orderSchema = new Schema({
         type: String,
         enum: ["Next Day", "Two Day", "Regular"],
         required: false
+    },
+    address: {
+        type: Schema.Types.Mixed,
+        required: true
     },
     trackingNumber: {
         type: String,
@@ -59,23 +63,34 @@ const orderSchema = new Schema({
 // Create Order model with defined schema
 const Order = mongoose.model("Order", orderSchema);
 
-const createOrder = (req, res, next ) => {
-    let newOrder = new Order(); 
-    newOrder.customerOrderNumber = req.session.customerOrderNumber;
+const getCart = (req, res, next) => {
+    res.status(200);
+    res.json({
+        "cart": req.session.products
+    });
+};
+
+const createOrder = (req, res, next) => {
+    // Get total product prices from products array in session
+    const subtotal = req.session.products.reduce((accum, current) => {
+        return accum + (current.product.price * current.quantity);
+    }, 0);
+    // Create new Order instance
+    let newOrder = new Order();
+    newOrder.customerOrderNumber = newOrder._id;
     newOrder.userId = req.session.userId;
     newOrder.products = req.session.products;
-    newOrder.status = req.session.status;
-    newOrder.shippingType = req.session.shippingType;
-    newOrder.trackingNumber = req.session.trackingNumber;
-    newOrder.subTotal = Number(req.session.subTotal);
-    (req.session.state === "TX" ? newOrder.tax = newOrder.subTotal * .0825 :
-        newOrder.tax = 0);
+    newOrder.status = "processing";
+    newOrder.shippingType = req.body.shippingType;
+    newOrder.address = req.body.shippingAddress;
+    newOrder.subTotal = subtotal;
+    (newOrder.address.state === "TX" ? newOrder.tax = newOrder.subTotal * .0825     : newOrder.tax = 0);
     newOrder.chargedTotal = newOrder.subTotal + newOrder.tax; 
     mongoose.connect(config.mongoConfigs.db);
-    console.log(newOrder);
     newOrder.save()
         .then((result) => {
             mongoose.disconnect();
+            req.session.products = [];
             res.status(200);
             res.json({
                 "message": "your order has been saved",
@@ -88,11 +103,13 @@ const createOrder = (req, res, next ) => {
             console.log(err);
             res.status(500);
             res.json({
-                "message":"nah, it didn't work"
+                "message":"Server Error: order was not placed",
+                "success": false
             });
         });
 };
 
 module.exports = {
-    "Order" : Order, 
-    "createOrder" : createOrder}
+    "Order" : Order,
+    "getCart": getCart,
+    "createOrder": createOrder}

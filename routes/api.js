@@ -14,7 +14,8 @@ router.post('/user/update', user.auth, user.updateUser);
 router.post('/user/login', user.loginUser);
 
 router.post('/cart', user.auth, product.addToCart);
-// router.get('/cart', user.auth, product.addToCart);
 
-router.post('/cart/checkout', user.auth, order.createOrder);
+router.route('/cart/checkout')
+    .get(user.auth, order.getCart)
+    .post(user.auth, order.createOrder);
 module.exports = router;

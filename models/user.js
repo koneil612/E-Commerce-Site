@@ -93,7 +93,6 @@ const loginUser = (req, res, next) =>{
                     req.session.token = token;
                     req.session.userId = result._id;
                     req.session.products = [];
-                    req.session.state = result.address[0].state;
                     res.json ({
                         "message" : "You're logged in",
                         "token" : token

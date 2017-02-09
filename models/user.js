@@ -47,24 +47,46 @@ const hashAndSave = (user, callback) => {
         }
         user.password = hash;
         mongoose.connect(config.mongoConfigs.db);
-        user.save()
-            .then((result) => {
+        User.findOne({ email: user.email }, (err, result) => {
+            if (err) {
+                mongoose.disconnect();
+                callback({
+                    "data": "",
+                    "success": true,
+                    "message": "Server error - user not saved"
+                });
+                console.log(err);
+            }
+            if (result) {
                 mongoose.disconnect();
                 callback({
                     "data": result,
-                    success:true,
-                    message:"user created"
+                    "success": false,
+                    "message":"User already exists"
                 });
-            })
-            .catch((err) => {
+            }
+            if (!result) {
                 mongoose.disconnect();
-                console.log(err);
-                callback({
-                    "data": "",
-                    success: false,
-                    message: "server error - user not saved"
-                });
-            });
+                user.save()
+                    .then((result) => {
+                        mongoose.disconnect();
+                        callback({
+                            "data": result,
+                            "success":true,
+                            "message":"Account created successfully!"
+                        });
+                    })
+                    .catch((err) => {
+                        mongoose.disconnect();
+                        console.log(err);
+                        callback({
+                            "data": "",
+                            "success": false,
+                            "message": "server error - user not saved"
+                        });
+                    });
+            }
+        });
     });
 };
 

@@ -105,7 +105,8 @@ const createOrder = (req, res, next) => {
             res.status(500);
             res.json({
                 "message":"Server Error: order was not placed",
-                "success": false
+                "success": false,
+                "data": ""
             });
         });
 };

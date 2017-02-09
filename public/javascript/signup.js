@@ -22,10 +22,13 @@ $(() => {
             "dataType": 'json',
             "encode": true,
             success: (response) => {
+                console.log("post successful!");
                 if (response.success === true) {
+                    console.log("post responded with success!");
                     $("div.signup-form-content-row").hide();
                     showSignupStatus(response);
                 } else {
+                    console.log("post responded with fail!");
                     showSignupStatus(response);
                 }
             },
@@ -36,7 +39,6 @@ $(() => {
 
 const showSignupStatus = ((response) => {
     const msg = (response.message ? response.message : "Couldn't create account. Please check your info and try again.");
-    const messageList = $("ul#messages-list");
-    messageList.remove("li.message");
-    messageList.append("<li class='message'>" + msg + "</li>");
+    $("li.message").remove();
+    $("ul#messages-list").append("<li class='message'>" + msg + "</li>");
 });

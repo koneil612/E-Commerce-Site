@@ -5,74 +5,28 @@
             <h3 class="">{{product.name}}</h3>
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-4">
-                images goes here
-            </div>
-            <div class="col-lg-2">
-                <p>Description: {{product.description}}</p>
-            </div>
-            <div class="col-lg-2">
-                <p>Price: {{product.price}}</p>
-            </div>
-        </div>
-        <div>
-            <button class="customize">Customize</button>
-        </div>
+        {{#each product}}
+                <div class="row">
+                    <div class="col-lg-4">
+                        <img src="http://placehold.it/50x50" alt="Product Img" />
+                    </div>
+                    <div class="col-lg-2">
+                        <p>Description: {{this.description}}</p>
+
+                    </div>
+                    <div class="col-lg-2">
+                        <p>Price: ${{this.price}}</p>
+                    </div>
+                </div>
+
+                <div><br />
+                    <button class="customize">Customize</button>
+                    <br />
+                </div>
+        {{/each}}
     </div>
 </div>
 
 
-<div>
-    <p>Stuff
-
-    {{#if product.customization.color}}
-    <p>
-        {{@key}}: {{this.product.customization.color}}
-        {{#each product.customization.color}}
-    </p>
-{{/each}}
-
-    {{/if}}
-    {{#if product.customization.gender}}{{this}}
-
-
-    {{/if}}
-    </p>
-
-    <p>
-        new if stuff
-<ul>
-        {{#each product.name}}
-          <div class="msg img">
-              <li>
-                    {{#isGlass}}
-            <br />
-            <div class="mugActive">{{this}} should show
-            </div>
-            <div class="mugNotActive">>
-                {{else}}la di da
-            </div>
-            {{/isGlass}}
-
-        </li>
-
-            {{/each}}
-
-          </div>
-
-      </ul>
-
-    </p>
-</div>
-
-        <div class="customization">
-            bah
-            <select>
-            {{#if product.customization}}
-                <option>{{this}}</option>
-            {{/if}}
-            </select>
-</div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 <script src="../javascript/products.js"></script>

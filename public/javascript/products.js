@@ -1,7 +1,7 @@
-Handlebars.registerHelper('isGlass', function(block) {
-  if (this.product.name == "Glass") {
-    return <
-  } else {
-    return block.inverse(this);
-  }
+Handlebars.registerHelper('if_eq', function(a, b, opts) {
+  if (a == b) {
+    return opts.fn(this);
+} else {
+    return opts.inverse(this);
+}
 });

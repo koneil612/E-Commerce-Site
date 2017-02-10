@@ -15,7 +15,7 @@ const Schema = mongoose.Schema;
 const productSchema = new Schema({
     name: {type: String, required: true},
     type: {type: String, required: true},
-    price: {type: String, required: true},
+    price: {type: Number, required: true},
     description: {type: String, required: true},
     quanity: Number,
     customization: {
@@ -76,11 +76,14 @@ const viewAll = (req, res, next) => {
     Product.find({})
         .then((result) => {
             mongoose.disconnect();
-            res.json({
-            "message": "Product page",
-            "success": true,
-            "Products": result
-            });
+            // res.json({
+            // "message": "Product page",
+            // "success": true,
+            // "Products": result
+            // });
+            // const products = {"products":result};
+            
+            res.render('product.hbs',{"product":result});
         });
 };
 
@@ -90,7 +93,7 @@ const viewProduct = (req, res, next) => {
     Product.findOne({_id: req.params.productId})
         .then((product) => {
             mongoose.disconnect();
-            console.log(product);
+            // console.log(product);
             res.render("product.hbs",{"product":product});
         });
 };

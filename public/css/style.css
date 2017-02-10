@@ -26,7 +26,7 @@ body, html {
   .nav li {
     display: inline;
     list-style: none;
-    padding: 8px; }
+    padding: 8px 8px 0 8px; }
 
 .navbar-brand {
   padding-left: 5px; }
@@ -34,6 +34,10 @@ body, html {
     font-family: 'Megrim', cursive;
     font-size: 2em;
     padding-top: 5px; }
+
+#logsign {
+  float: right;
+  font-size: 1.2em; }
 
 #mynavbar-content {
   background-color: #fff; }
@@ -98,6 +102,10 @@ ___________________________________________________
 */
 #cart-container {
   padding-left: 30px; }
+  #cart-container h3 {
+    font-family: 'Megrim', cursive;
+    font-size: 2.4em;
+    padding-bottom: 20px; }
 
 #shopping-cart {
   padding-right: 20%; }
@@ -123,5 +131,8 @@ ___________________________________________________
 
 #quantity {
   padding: 2px; }
+
+#shipping {
+  padding: 10px; }
 
 /*# sourceMappingURL=style.css.map */

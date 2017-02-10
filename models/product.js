@@ -15,8 +15,8 @@ const Schema = mongoose.Schema;
 const productSchema = new Schema({
     name: {type: String, required: true},
     type: {type: String, required: true},
-    price: {type: Number, required: true},
-    description: {type: Number, required: true},
+    price: {type: String, required: true},
+    description: {type: String, required: true},
     quanity: Number,
     customization: {
         fname: String,
@@ -88,14 +88,10 @@ const viewProduct = (req, res, next) => {
     // find products
     mongoose.connect(config.mongoConfigs.db);
     Product.findOne({_id: req.params.productId})
-        .then((result) => {
+        .then((product) => {
             mongoose.disconnect();
-            console.log(result);
-            res.json({
-            "message": "Product",
-            "success": true,
-            "product": result
-            });
+            console.log(product);
+            res.render("product.hbs",{"product":product});
         });
 };
 

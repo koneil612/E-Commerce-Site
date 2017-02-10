@@ -25,6 +25,7 @@ $(() => {
 
 const showLoginError = (() => {
     const messageListItem = $("li#message");
+    $("div.messages").show();
     messageListItem.empty();
     messageListItem.text("Login failed, please try again.");
 })

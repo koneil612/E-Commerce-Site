@@ -82,4 +82,10 @@ body, html {
   .footer-menu div {
     background: #000; }
 
+div.signup-page-login-form-content-row {
+  display: none; }
+
+div.messages {
+  display: none; }
+
 /*# sourceMappingURL=style.css.map */

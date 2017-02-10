@@ -5,20 +5,20 @@
 
 const router = require('express').Router();
 //To-Do: remove reqs that aren't needed
-const user = require('../models/user');
-const product = require('../models/product');
-const order = require('../models/order');
+// const user = require('../models/user');
+// const product = require('../models/product');
+// const order = require('../models/order');
 
 router.get('/user/login', (req, res) => {
-    res.render('../public/templates/login');
+    res.render('login.hbs');
 });
 
 router.get('/user/signup', (req, res) => {
-    res.render('../public/templates/signup');
+    res.render('signup.hbs');
 });
 
 router.get('/user/account', (req, res) => {
-    res.render('../public/templates/account')
+    res.render('account.hbs');
 });
 
 module.exports = router;

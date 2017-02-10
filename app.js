@@ -5,6 +5,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const session = require('express-session');
+const path = require('path');
 
 const config = require("./models/config");
 
@@ -17,12 +18,13 @@ const sess = {
 const api = require('./routes/api');
 const client = require('./routes/client');
 
-app.use(express.static('public'));
+app.use(express.static(__dirname + 'public'));
 app.use(session(sess));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use('/api', api);
 app.use('/', client);
+app.set('views', __dirname + '/public/views');
 app.set('view engine', 'hbs');
 
 // Start up localhost server

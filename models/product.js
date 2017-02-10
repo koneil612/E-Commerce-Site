@@ -68,9 +68,6 @@ const addToCart = (req, res, next) => {
                                 "success": false
                         });
                 });
-
-        // Get quantity, product customizations
-        // Add to session
 };
 
 const viewAll = (req, res, next) => {

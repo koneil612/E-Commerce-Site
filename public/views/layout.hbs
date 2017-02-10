@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="../public/css/style.css" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+        <title>Kristine's Corner Crafts</title>
+    </head>
+    <body>
+        <div id="navbar" class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#"><p>A KCC</p></a>
+                </div>
+                <div id="mynavbar-content">
+                    <ul class="nav navbar-nav">
+                        <li class="active">
+                            <li><a href=#>Home</a></li>
+                            <li><a href=#>Products</a></li>
+                            <li><a href=#>About</a></li>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {{{ body }}}
+        <div id="footer" class="footer">
+            <div class="col-md-8" "footer-menu">
+                <p>
+                    Menu<br />_____
+                </p>
+                <ul>
+                    <li>
+                        <a href=#>About</a>
+                    </li>
+                    <li>
+                        <a href=#>Products</a>
+                    </li>
+                    <li>
+                        <a href=#>Home</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-sm-4" "footer-menu">
+                <p>
+                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+                </p>
+            </div>
+        </div>
+        <script type="text/javascript">
+            var jumboHeight = $('.jumbotron').outerHeight();
+            function parallax(){
+                var scrolled = $(window).scrollTop();
+                $('.bg').css('height', (jumboHeight-scrolled) + 'px');
+            }
+            $(window).scroll(function(e){
+                parallax();
+            });
+        </script>
+    </body>
+</html>

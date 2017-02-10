@@ -35,6 +35,7 @@ router.get('/user/account', user.clientAuth, (req, res) => {
  router.get('/products/:productId', (req, res) => {
      res.render("product.hbs", {products:"products"});
  });
+ router.get('/products/:productId',product.viewProduct);
 
 /**
  * Cart routes

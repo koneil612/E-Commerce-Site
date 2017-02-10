@@ -6,6 +6,12 @@ const config = require("./config");
 const bluebird = require("bluebird");
 // Import mongoose ORM and connect to DB
 //Import mongoose ORM and connect to DB
+
+// <<<<<<< Updated upstream
+// Import mongoose ORM and connect to DB
+// =======
+//Import mongoose ORM and connect to DB
+// >>>>>>> Stashed changes
 const mongoose = require("mongoose");
 mongoose.promise = bluebird;
 // mongoose.connect(config.db);
@@ -86,7 +92,7 @@ const createOrder = (req, res, next) => {
     newOrder.address = req.body.shippingAddress;
     newOrder.subTotal = subtotal;
     (newOrder.address.state === "TX" ? newOrder.tax = newOrder.subTotal * .0825     : newOrder.tax = 0);
-    newOrder.chargedTotal = newOrder.subTotal + newOrder.tax; 
+    newOrder.chargedTotal = newOrder.subTotal + newOrder.tax;
     mongoose.connect(config.mongoConfigs.db);
     newOrder.save()
         .then((result) => {

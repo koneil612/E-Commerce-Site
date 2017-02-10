@@ -82,19 +82,19 @@ const viewAll = (req, res, next) => {
             // "Products": result
             // });
             // const products = {"products":result};
-            
+
             res.render('product.hbs',{"product":result});
         });
 };
 
 const viewProduct = (req, res, next) => {
-    // find products
+    // find products by ID
     mongoose.connect(config.mongoConfigs.db);
     Product.findOne({_id: req.params.productId})
         .then((product) => {
             mongoose.disconnect();
             // console.log(product);
-            res.render("product.hbs",{"product":product});
+            res.render('product.hbs',{"product":product});
         });
 };
 

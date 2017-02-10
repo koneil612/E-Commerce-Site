@@ -20,8 +20,15 @@ router.get('/', (req, res) => res.render('index.hbs'));
 router.get('/user/signup', (req, res) => res.render('signup.hbs'));
 router.get('/user/login', (req, res) => res.render('login.hbs'));
 router.get('/user/account', user.clientAuth, (req, res) => {
-    console.log("rendering anyway!");
     res.render('account.hbs');
+});
+
+
+/**
+ * Cart routes
+ */
+router.get('/cart', (req, res) => {
+    res.render('cart.hbs');
 });
 
 module.exports = router;

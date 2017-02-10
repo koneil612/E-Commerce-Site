@@ -1,28 +1,27 @@
 /**
- * Router for clientside endpoints. Mounted at /
+ * Router for client-side endpoints. Mounted at /
  */
 'use strict';
 
 const router = require('express').Router();
 //To-Do: remove reqs that aren't needed
-// const user = require('../models/user');
+const user = require('../models/user');
 // const product = require('../models/product');
 // const order = require('../models/order');
 
-router.get('/user/login', (req, res) => {
-    res.render('login.hbs');
-});
+/**
+ * Homepage route
+ */
+router.get('/', (req, res) => res.render('index.hbs'));
 
-router.get('/user/signup', (req, res) => {
-    res.render('signup.hbs');
-});
-
-router.get('/user/account', (req, res) => {
+/**
+ * User routes
+ */
+router.get('/user/signup', (req, res) => res.render('signup.hbs'));
+router.get('/user/login', (req, res) => res.render('login.hbs'));
+router.get('/user/account', user.clientAuth, (req, res) => {
+    console.log("rendering anyway!");
     res.render('account.hbs');
-});
-
-router.get('/', (req, res) => {
-    res.render('index.hbs');
 });
 
 module.exports = router;

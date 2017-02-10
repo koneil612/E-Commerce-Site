@@ -137,14 +137,34 @@ const loginUser = (req, res, next) =>{
         });
 };
 
-const auth = (req, res, next)=>{
+/**
+ * Authentication validator for API routes
+ */
+const apiAuth = (req, res, next) => {
+    checkToken(req, next);
+    res.status(401);
+    res.json({ 
+        "message": "Error: could not log in",
+        "success": false
+    });
+};
+
+/**
+ * Authentication validator for end-client routes
+ */
+const clientAuth = (req, res, next) => {
+    checkToken(req, next);
+    res.redirect('/user/login');
+};
+
+/**
+ * Token checker for auth functions
+ */
+const checkToken = (req, next) => {
     if (req.session.token) {
         next();
-    } else {
-        res.status(401);
-        res.json({ "message": "Error: could not log in" });
     }
-}
+};
 
 const updateUser = (req, res, next) => {
     mongoose.connect(config.mongoConfigs.db);
@@ -176,6 +196,7 @@ module.exports = {
     "User": User,
     "createUser": createUser,
     "updateUser": updateUser,
-    "loginUser" : loginUser,
-    "auth" : auth
+    "loginUser": loginUser,
+    "apiAuth": apiAuth,
+    "clientAuth": clientAuth
 };

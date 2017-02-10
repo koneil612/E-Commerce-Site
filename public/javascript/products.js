@@ -1,7 +1,7 @@
-Handlebars.registerHelper("if", function("product.name", name) {
-  if (product.name === "16oz Glass") {
-    res.json("You have a mug yay");
+Handlebars.registerHelper('isGlass', function(block) {
+  if (this.product.name == "Glass") {
+    return <
   } else {
-    res.json("no mug");
+    return block.inverse(this);
   }
 });

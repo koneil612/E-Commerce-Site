@@ -42,17 +42,26 @@
 
     <p>
         new if stuff
-        {{#if type desired="customization" type=type}}
+<ul>
+        {{#each product.name}}
           <div class="msg img">
-            <strong>{{user}}</strong> <i>shared an image</i>
+              <li>
+                    {{#isGlass}}
             <br />
-            <a href="{{file}}"><img src="{{file}}" /></a>
-          </div>
-        {{/if}}
+            <div class="mugActive">{{this}} should show
+            </div>
+            <div class="mugNotActive">>
+                {{else}}la di da
+            </div>
+            {{/isGlass}}
 
-        {{#if "product.name" = "16oz Glass"}}
-         <h1> {{this}}</h1>
-        {{/if}}
+        </li>
+
+            {{/each}}
+
+          </div>
+
+      </ul>
 
     </p>
 </div>

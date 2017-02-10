@@ -1,0 +1,55 @@
+{{{cart}}}
+<div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+            <h3 class="">Your Cart</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+            </div>
+            <div class="col-lg-2">
+                <p>Price</p>
+            </div>
+            <div class="col-lg-2">
+                <p>Quanity</p>
+            </div>
+            <div class="col-lg-2">
+                <p>Total</p>
+            </div>
+        </div>
+    <hr />
+        <div class="row">
+                <div class="col-lg-2">
+                    <p><img src="" />Product Img</p>
+                </div>
+                <div class="col-lg-2">
+                    <p>{{{products.description}}}</p>
+                </div>
+                <div class="col-lg-2">
+                </div>
+            <div class="col-lg-2">
+                <p>${{{products.price}}}</p>
+            </div>
+            <div class="col-lg-2">
+                <button id="decrease-button">-</button><input class="quantity" name="quantity" value="1">
+                <button id="increase-button">+</button>
+            </div>
+            <div class="col-lg-2">
+                <p>$total goes here</p>
+            </div>
+        </div>
+    <hr />
+    <div class="row">
+            <div class="col-lg-10">
+            </div>
+            <div class="col-lg-2">
+                <p class="subtotal">
+                    Subtotal: ---
+                </p>
+                <p>Shipping & Taxes calcualted at checkout</p>
+                <button id="updatecart">Update Cart</button><button id="checkout">Check Out</button>
+            </div>
+    </div>
+</div>

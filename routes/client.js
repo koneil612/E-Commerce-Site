@@ -25,4 +25,8 @@ router.get('/', (req, res) => {
     res.render('index.hbs');
 });
 
+router.get('/cart', (req, res) => {
+    res.render('cart.hbs');
+});
+
 module.exports = router;

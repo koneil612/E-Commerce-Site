@@ -7,7 +7,7 @@ const router = require('express').Router();
 //To-Do: remove reqs that aren't needed
 const user = require('../models/user');
 const product = require('../models/product');
-// const order = require('../models/order');
+const order = require('../models/order');
 
 /**
  * Homepage route
@@ -38,10 +38,13 @@ router.get('/user/account', user.clientAuth, (req, res) => {
  router.get('/products/:productId',product.viewProduct);
 
 /**
- * Cart routes
+ * Order routes
  */
-router.get('/cart', (req, res) => {
-    res.render('cart.hbs');
-});
+
+router.get('/cart', product.addToCart);
+router.route('/cart/checkout')
+    .get(user.clientAuth, order.getCart)
+    .post(user.clientAuth, order.createOrder);
+
 
 module.exports = router;

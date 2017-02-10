@@ -51,13 +51,14 @@ const addToCart = (req, res, next) => {
                                 customization: req.body.customization,
                                 quantity: Number(req.body.quantity)
                         });
-                        res.status(200);
-                        res.json({
-                                "message": "Product added to cart",
-                                "success": true,
-                                "rawProduct": result,
-                                "customization": req.body.customization
-                        });
+                        // res.status(200);
+                        res.render('cart.hbs',{"product":result});
+                        // res.json({
+                        //         "message": "Product added to cart",
+                        //         "success": true,
+                        //         "rawProduct": result,
+                        //         "customization": req.body.customization
+                        // });
                 })
                 .catch((err) => {
                         mongoose.disconnect();
@@ -93,8 +94,8 @@ const viewProduct = (req, res, next) => {
     Product.findOne({_id: req.params.productId})
         .then((product) => {
             mongoose.disconnect();
-            // console.log(product);
-            res.render('product.hbs',{"product":product});
+            console.log(product);
+            res.render('productid.hbs',{"product":product});
         });
 };
 

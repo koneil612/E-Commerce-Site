@@ -99,11 +99,13 @@ const createOrder = (req, res, next) => {
             mongoose.disconnect();
             req.session.products = [];
             res.status(200);
-            res.json({
-                "message": "your order has been saved",
-                "success": true,
-                "data": result
-            });
+            // res.json({
+            //     "message": "your order has been saved",
+            //     "success": true,
+            //     "data": result
+            // });
+            res.render('checkout.hbs',{"cart":result});
+
         })
         .catch ((err) => {
             mongoose.disconnect();

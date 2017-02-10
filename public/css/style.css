@@ -148,4 +148,25 @@ ___________________________________________________
     font-size: 2.4em;
     padding-bottom: 20px; }
 
+/*
+___________________________________________________
+
+                S I G N  U P
+___________________________________________________
+*/
+.signup-form-header-row {
+  text-align: center; }
+
+#account-signup-container {
+  border-radius: 10px;
+  padding: 40px;
+  background: rgba(217, 237, 248, 0.2);
+  width: 30%; }
+  #account-signup-container h3 {
+    font-family: 'Megrim', cursive;
+    font-size: 2.4em;
+    padding-bottom: 20px; }
+  #account-signup-container label {
+    font-weight: lighter; }
+
 /*# sourceMappingURL=style.css.map */

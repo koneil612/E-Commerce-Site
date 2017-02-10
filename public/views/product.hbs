@@ -41,10 +41,17 @@
     </p>
 
     <p>
-        deepak stuff
+        new if stuff
+        {{#if type desired="customization" type=type}}
+          <div class="msg img">
+            <strong>{{user}}</strong> <i>shared an image</i>
+            <br />
+            <a href="{{file}}"><img src="{{file}}" /></a>
+          </div>
+        {{/if}}
 
-        {{#if product.name | "16oz Glass"}}
-         <h1> you have a glass</h1>
+        {{#if "product.name" = "16oz Glass"}}
+         <h1> {{this}}</h1>
         {{/if}}
 
     </p>
@@ -58,3 +65,5 @@
             {{/if}}
             </select>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script src="../javascript/products.js"></script>

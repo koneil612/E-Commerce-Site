@@ -36,6 +36,24 @@ const userSchema = new Schema({
 // Create a User model with defined schema
 const User = mongoose.model("User", userSchema);
 
+/**
+ * Staticmethod retrieving a user object. Accepts callback as last arg to
+ * handle rendering.
+ */
+const getUser = (userId, callback) => {
+    mongoose.connect(config.mongoConfigs.db);
+    User.findOne({ _id: userId })
+        .then((result) => {
+            mongoose.disconnect();
+            callback(result);
+        })
+        .catch((err) => {
+            mongoose.disconnect();
+            console.log(err);
+            callback({});
+        });
+};
+
 // User auth instance method sets password to hash
 const hashAndSave = (user, callback) => {
     const saltRounds = 10;
@@ -193,6 +211,7 @@ const updateUser = (req, res, next) => {
 
 module.exports = {
     "User": User,
+    "getUser": getUser,
     "createUser": createUser,
     "updateUser": updateUser,
     "loginUser": loginUser,

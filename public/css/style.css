@@ -63,7 +63,10 @@ body, html {
   #featured h2 {
     font-family: 'Megrim', cursive;
     font-size: 3em;
-    padding-bottom: 20px; }
+    padding-bottom: 40px; }
+
+#item img {
+  border-radius: 50px; }
 
 .jumbotron {
   padding: 25px;
@@ -77,7 +80,7 @@ body, html {
   text-shadow: #444 0 1px 1px; }
 
 .footer {
-  padding-top: 20%; }
+  padding-top: 10%; }
   .footer a {
     font-size: 1.2em; }
   .footer ul {
@@ -142,7 +145,10 @@ ___________________________________________________
 ___________________________________________________
 */
 #account-login-container {
-  text-align: center; }
+  text-align: center;
+  background: rgba(217, 237, 248, 0.2);
+  width: 40%;
+  padding: 30px; }
   #account-login-container h3 {
     font-family: 'Megrim', cursive;
     font-size: 2.4em;
@@ -161,12 +167,15 @@ ___________________________________________________
   border-radius: 10px;
   padding: 40px;
   background: rgba(217, 237, 248, 0.2);
-  width: 30%; }
+  width: 40%; }
   #account-signup-container h3 {
     font-family: 'Megrim', cursive;
     font-size: 2.4em;
     padding-bottom: 20px; }
   #account-signup-container label {
     font-weight: lighter; }
+
+.btn-primary {
+  padding: 30px; }
 
 /*# sourceMappingURL=style.css.map */

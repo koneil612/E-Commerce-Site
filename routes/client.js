@@ -6,7 +6,7 @@
 const router = require('express').Router();
 //To-Do: remove reqs that aren't needed
 const user = require('../models/user');
-// const product = require('../models/product');
+const product = require('../models/product');
 // const order = require('../models/order');
 
 /**
@@ -26,9 +26,20 @@ router.get('/user/account', user.clientAuth, (req, res) => {
     });
 });
 
+
+/**
+ * Product routes
+ */
+
+ router.get('/products', product.viewAll);
+ router.get('/products/:productId', (req, res) => {
+     res.render("product.hbs",{products:"products"});
+ });
+
 /**
  * Cart routes
  */
+
 router.get('/cart', (req, res) => {
     res.render('cart.hbs');
 });

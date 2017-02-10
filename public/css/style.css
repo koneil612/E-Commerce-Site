@@ -1,0 +1,85 @@
+@import url("https://fonts.googleapis.com/css?family=Abel");
+@import url("https://fonts.googleapis.com/css?family=Megrim");
+body, html {
+  font-family: "Abel","Helvetica Neue",Arial,sans-serif;
+  color: #656565;
+  background: #eee; }
+  body a, html a {
+    color: #656565;
+    text-decoration: none; }
+  body a:active, html a:active {
+    color: #f4a482; }
+  body a:hover, html a:hover {
+    color: #f4a482; }
+  body h1, html h1 {
+    font-family: 'Megrim', cursive; }
+
+#navbar {
+  padding-left: 10px;
+  background-color: #fff;
+  border: none; }
+
+.nav {
+  font-family: "Abel","Helvetica Neue",Arial,sans-serif;
+  font-size: 1.5em;
+  background-color: #fff; }
+  .nav li {
+    display: inline;
+    list-style: none;
+    padding: 8px; }
+
+.navbar-brand {
+  padding-left: 5px; }
+  .navbar-brand p {
+    font-family: 'Megrim', cursive;
+    font-size: 2em;
+    padding-top: 5px; }
+
+#mynavbar-content {
+  background-color: #fff; }
+  #mynavbar-content ul {
+    float: right; }
+  #mynavbar-content a {
+    color: #656565;
+    text-decoration: none; }
+  #mynavbar-content a:active {
+    color: #f4a482; }
+  #mynavbar-content a:hover {
+    color: #f4a482; }
+
+#innertext {
+  padding-top: 25px;
+  background: rgba(244, 164, 130, 0.03);
+  text-align: right; }
+
+#featured {
+  background: #fff; }
+  #featured img {
+    padding-top: 8px; }
+  #featured h2 {
+    font-family: 'Megrim', cursive;
+    font-size: 3em;
+    padding-bottom: 20px; }
+
+.jumbotron {
+  padding: 25px;
+  padding-right: 50px;
+  text-align: center;
+  background: fixed #000 url("../images/kitchen2.jpg") -200px center;
+  width: 100%;
+  height: 34vw;
+  background-size: cover;
+  color: white;
+  text-shadow: #444 0 1px 1px; }
+
+.footer a {
+  font-size: 1.2em; }
+.footer ul {
+  list-style: none; }
+
+.footer-menu {
+  padding: 10px; }
+  .footer-menu div {
+    background: #000; }
+
+/*# sourceMappingURL=style.css.map */

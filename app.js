@@ -18,7 +18,7 @@ const sess = {
 const api = require('./routes/api');
 const client = require('./routes/client');
 
-app.use(express.static(__dirname + 'public'));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(session(sess));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());

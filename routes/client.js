@@ -21,4 +21,8 @@ router.get('/user/account', (req, res) => {
     res.render('account.hbs');
 });
 
+router.get('/', (req, res) => {
+    res.render('index.hbs');
+});
+
 module.exports = router;

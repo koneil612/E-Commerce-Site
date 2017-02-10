@@ -3,7 +3,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-            <h3 class="">Your Cart</h3>
+            <h2 class="">Your Cart</h2>
             </div>
         </div>
         <div class="row">
@@ -13,7 +13,7 @@
                 <p>Price</p>
             </div>
             <div class="col-lg-2">
-                <p>Quanity</p>
+                <p>Quantity</p>
             </div>
             <div class="col-lg-2">
                 <p>Total</p>
@@ -21,23 +21,23 @@
         </div>
     <hr />
         <div class="row">
-                <div class="col-lg-2">
-                    <p><img src="" />Product Img</p>
+                <div class="col-lg-2" id="product-img">
+                    <p><img src="http://placehold.it/50x50" alt="Product Img" /></p>
                 </div>
-                <div class="col-lg-2">
+                <div class="col-lg-2" id="item-name">
                     <p>{{{products.description}}}</p>
                 </div>
                 <div class="col-lg-2">
                 </div>
-            <div class="col-lg-2">
-                <p>${{{products.price}}}</p>
+            <div class="col-lg-2" id = "price">
+                $24
+            </div>
+            <div class="col-lg-2" id="quantos">
+                <button id="increase-button">+</button><input class="quantity" id="quantity" value="1"><button id="decrease-button">-</button>
+
             </div>
             <div class="col-lg-2">
-                <button id="decrease-button">-</button><input class="quantity" name="quantity" value="1">
-                <button id="increase-button">+</button>
-            </div>
-            <div class="col-lg-2">
-                <p>$total goes here</p>
+                <p>$24</p>
             </div>
         </div>
     <hr />

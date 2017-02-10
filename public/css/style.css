@@ -88,4 +88,32 @@ div.signup-page-login-form-content-row {
 div.messages {
   display: none; }
 
+/*
+___________________________________________________
+
+             S H O P P I N G  C A R T
+___________________________________________________
+*/
+#product-img {
+  text-align: center; }
+
+.quantity {
+  width: 25px; }
+
+#increase-button, #decrease-button {
+  border-radius: 50%;
+  padding-left: 8px;
+  padding-right: 8px;
+  font-size: 14px;
+  color: #656565;
+  text-align: center;
+  background: #d9edf8;
+  border: 0; }
+
+#decrease-button {
+  padding-right: 10px; }
+
+#quantity {
+  padding: 2px; }
+
 /*# sourceMappingURL=style.css.map */

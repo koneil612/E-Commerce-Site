@@ -35,10 +35,10 @@ $(() => {
     });
 });
 
-const showSignupStatus = ((response) => {
+const showSignupStatus = (response) => {
     const messageListItem = $("li#message");
     const msg = (response.message ? response.message : "Couldn't create account. Please check your info and try again.");
     $("div.messages").show();
     messageListItem.empty();
     messageListItem.text(msg);
-});
+};

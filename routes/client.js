@@ -23,7 +23,7 @@ router.get('/user/account', user.clientAuth, (req, res) => {
     const userId = req.session.userId;
     user.getUser(userId, (result) => {
         console.log(result);
-        res.render('account.hbs', result)
+        res.render('account.hbs', result);
     });
 });
 

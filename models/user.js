@@ -190,7 +190,6 @@ const updateUser = (req, res, next) => {
             fName: req.body.fName,
             lName: req.body.lName,
             email: req.body.email,
-            address: req.body.address,
             lastUpdated: new Date()
         }
     },
@@ -198,11 +197,14 @@ const updateUser = (req, res, next) => {
             mongoose.disconnect();
             if (err) {
                 res.json({
-                    "message": "update not successful"
+                    "message": "Problem updating account",
+                    "success": false,
+                    "data": {}
                 })
             } else {
                 res.json({
-                "message": "updated contact",
+                "message": "Updated account successfully",
+                "success": true,
                 "data": result
                 });
             }

@@ -16,6 +16,7 @@ router.post('/cart', user.auth, product.addToCart);
 
 router.get('/products', product.viewAll);
 router.get('/products/:productId', product.viewProduct);
+
 router.route('/cart/checkout')
     .get(user.auth, order.getCart)
     .post(user.auth, order.createOrder);

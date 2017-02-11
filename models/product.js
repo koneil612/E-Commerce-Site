@@ -52,7 +52,8 @@ const addToCart = (req, res, next) => {
                                 quantity: Number(req.body.quantity)
                         });
                         // res.status(200);
-                        res.render('cart.hbs',{"product":result});
+                        res.render('cart.hbs',
+                                {product: result, session: req.session});
                         // res.json({
                         //         "message": "Product added to cart",
                         //         "success": true,

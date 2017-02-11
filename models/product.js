@@ -84,7 +84,7 @@ const viewAll = (req, res, next) => {
             // "Products": result
             // });
             // const products = {"products":result};
-            res.render('product.hbs',{"product":result});
+            res.render('product.hbs',{"product":result, session: req.session});
         });
 };
 

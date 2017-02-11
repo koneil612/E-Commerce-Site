@@ -1,3 +1,4 @@
+'use strict';
 /**
  * Mongoose schema and model for Users collection
  */

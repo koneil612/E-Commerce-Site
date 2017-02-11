@@ -1,7 +1,7 @@
+'use strict';
 /**
  * Router for client-side endpoints. Mounted at /
  */
-'use strict';
 
 const router = require('express').Router();
 //To-Do: remove reqs that aren't needed

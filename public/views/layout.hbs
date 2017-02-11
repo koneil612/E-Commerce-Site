@@ -30,7 +30,7 @@
                     <ul>
                         <li><a href="/user/signup">Sign Up</a></li> |
                         <li>
-                            {{#if token}}
+                            {{#if session.token}}
                                 <button type="button" id="logOut-button" class="btn btn-primary">
                                     Log Out
                                 </button>

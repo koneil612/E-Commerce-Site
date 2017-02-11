@@ -94,8 +94,10 @@ const viewProduct = (req, res, next) => {
         .then((product) => {
             mongoose.disconnect();
             console.log(product);
-            res.render('productid.hbs',{"product":product}, req.session);
+            res.render('productid.hbs',
+                {product: product, session: req.session});
         });
+        //To-Do: error handling
 };
 
 module.exports = {

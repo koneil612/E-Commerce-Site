@@ -12,18 +12,24 @@ const order = require('../models/order');
 /**
  * Homepage route
  */
-router.get('/', (req, res) => res.render('index.hbs', req.session));
+router.get('/', (req, res) => res.render('index.hbs', {session: req.session}));
 
 /**
  * User routes
  */
-router.get('/user/signup', (req, res) => res.render('signup.hbs', req.session));
-router.get('/user/login', (req, res) => res.render('login.hbs', req.session));
+router.get('/user/signup', (req, res) => {
+    if (req.session.token) {
+        res.redirect('/user/account');
+    } else {
+        res.render('signup.hbs', {session: req.session});
+    }
+});
+router.get('/user/login', (req, res) => res.render('login.hbs', 
+    {session: req.session}));
 router.get('/user/account', user.clientAuth, (req, res) => {
     const userId = req.session.userId;
-    // const session = req.session;
     user.getUser(userId, (result) => {
-        res.render('account.hbs', result, req.session);
+        res.render('account.hbs', {result: result, session: req.session});
     });
 });
 
@@ -32,7 +38,7 @@ router.get('/user/account', user.clientAuth, (req, res) => {
  */
  router.get('/products', product.viewAll);
  router.get('/products/:productId', (req, res) => {
-     res.render("product.hbs", {products:"products"});
+     res.render("product.hbs", {session: req.session, products:"products"});
  });
  router.get('/products/:productId',product.viewProduct);
 

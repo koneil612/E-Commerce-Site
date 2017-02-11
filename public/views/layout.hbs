@@ -28,18 +28,22 @@
                 <div class="nav col-lg-2" id="logsign">
                     <hr />
                     <ul>
-                        <li><a href="/user/signup">Sign Up</a></li> |
-                        <li>
-                            {{#if session.token}}
+                        {{#if session.token}}
+                            <li>
                                 <button type="button" id="logOut-button" class="btn btn-primary">
                                     Log Out
                                 </button>
-                            {{else}}
+                            </li>
+                        {{else}}
+                            <li>
+                                <a href="/user/signup">Sign Up</a>
+                            </li> |
+                            <li>
                                 <button type="button" id="logIn-button" class="btn btn-primary">
                                     Log In
                                 </button>
-                            {{/if}}
-                        </li>
+                            </li>
+                        {{/if}}
                     </ul>
                 </div>
             </div>

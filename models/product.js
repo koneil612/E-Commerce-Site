@@ -83,7 +83,6 @@ const viewAll = (req, res, next) => {
             // "Products": result
             // });
             // const products = {"products":result};
-
             res.render('product.hbs',{"product":result});
         });
 };
@@ -95,7 +94,7 @@ const viewProduct = (req, res, next) => {
         .then((product) => {
             mongoose.disconnect();
             console.log(product);
-            res.render('productid.hbs',{"product":product});
+            res.render('productid.hbs',{"product":product}, req.session);
         });
 };
 

@@ -121,7 +121,7 @@ const createUser = (req, res, next) => {
     });
 };
 
-const loginUser = (req, res, next) =>{
+const loginUser = (req, res, next) => {
     mongoose.connect(config.mongoConfigs.db);
     User.findOne({email: req.body.email})
         .then((result) => {
@@ -153,6 +153,14 @@ const loginUser = (req, res, next) =>{
                 "success": false
             });
         });
+};
+
+const logoutUser = (req, res, next) => {
+    delete req.session["token"];
+    res.json({
+        "message": "user logged out",
+        "success": true
+    });
 };
 
 /**
@@ -217,6 +225,7 @@ module.exports = {
     "createUser": createUser,
     "updateUser": updateUser,
     "loginUser": loginUser,
+    "logoutUser": logoutUser,
     "apiAuth": apiAuth,
     "clientAuth": clientAuth
 };

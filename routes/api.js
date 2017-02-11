@@ -13,6 +13,7 @@ const order = require('../models/order');
  */
 router.post('/user/signup', user.createUser);
 router.post('/user/login', user.loginUser);
+router.post('/user/logout', user.logoutUser);
 router.post('/user/update', user.apiAuth, user.updateUser);
 
 /**

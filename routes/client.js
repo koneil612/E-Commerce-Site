@@ -12,18 +12,18 @@ const order = require('../models/order');
 /**
  * Homepage route
  */
-router.get('/', (req, res) => res.render('index.hbs'));
+router.get('/', (req, res) => res.render('index.hbs', req.session));
 
 /**
  * User routes
  */
-router.get('/user/signup', (req, res) => res.render('signup.hbs'));
-router.get('/user/login', (req, res) => res.render('login.hbs'));
+router.get('/user/signup', (req, res) => res.render('signup.hbs', req.session));
+router.get('/user/login', (req, res) => res.render('login.hbs', req.session));
 router.get('/user/account', user.clientAuth, (req, res) => {
     const userId = req.session.userId;
+    // const session = req.session;
     user.getUser(userId, (result) => {
-        console.log(result);
-        res.render('account.hbs', result);
+        res.render('account.hbs', result, req.session);
     });
 });
 

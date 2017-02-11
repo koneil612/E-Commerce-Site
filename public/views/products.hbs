@@ -6,16 +6,15 @@
         </div>
         {{#each product}}
                 <div class="row">
-                    <h4 class="">{{this.name}}</h4>
+                    <h4 class="">{{name}}</h4>
                     <div class="col-lg-2">
-                        <img src="http://placehold.it/50x50" alt="Product Img" />
+                        <img src="{{image}}" alt="Product Img" height="160" width="120"/>
                     </div>
                     <div class="col-lg-2">
-                        <p>Description: {{this.description}}</p>
-
+                        <p>{{description}}</p>
                     </div>
                     <div class="col-lg-2">
-                        <p>Price: ${{this.price}}</p>
+                        <p>Price: ${{price}}</p>
                     </div>
 
                     <div class="col-lg-2">

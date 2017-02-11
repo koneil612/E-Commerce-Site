@@ -183,9 +183,7 @@ const apiAuth = (req, res, next) => {
     }
 };
 
-/**
- * Authentication responder for end-client routes
- */
+/* Authentication responder for end-client routes */
 const clientAuth = (req, res, next) => {
     (checkToken(req) ? next() : res.redirect('/user/login'));
 };

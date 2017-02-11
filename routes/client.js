@@ -51,7 +51,12 @@ router.get('/user/account', user.clientAuth, (req, res) => {
 /**
  * Order routes
  */
-router.get('/cart', product.addToCart);
+router.post('/cart', (req, res) => {
+    product.addToCart(req, (result) => {
+        res.render('products.hbs', {product: result, session: req.session});
+    });
+});
+
 router.route('/cart/checkout')
     .get(user.clientAuth, order.getCart)
     .post(user.clientAuth, order.createOrder);

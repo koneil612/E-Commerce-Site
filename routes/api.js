@@ -58,7 +58,23 @@ router.get('/products/:productId', (req, res) => {
     });
 });
 
-router.post('/cart', user.apiAuth, product.addToCart);
+router.post('/cart', (req, res) => {
+    product.addToCart(req, (result) => {
+        if (result) {
+            res.json({
+                "message": "Added product to cart",
+                "success": true,
+                "product": result
+            });
+        } else {
+            res.json({
+                "message": "Failed to add product to cart",
+                "success": false,
+                "product": {}
+            });
+        }
+    });
+});
 
 /**
  * Order routes

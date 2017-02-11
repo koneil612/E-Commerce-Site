@@ -2,16 +2,16 @@
  * Mongoose schema and model for Products collection.
  */
 
+/* Required modules and settings */
 const config = require("./config");
 const bluebird = require('bluebird');
-// Import Mongoose schema and connect to DB
 const mongoose = require('mongoose');
 mongoose.promise = bluebird;
 
-// Create a schema
+/* Create a new schema */
 const Schema = mongoose.Schema;
 
-// Define the product schema
+/* Define the product schema */
 const productSchema = new Schema({
     name: {type: String, required: true},
     type: {type: String, required: true},
@@ -35,43 +35,10 @@ const productSchema = new Schema({
     image: [String]
 });
 
+/* Define the product model */
 const Product = mongoose.model('Product', productSchema);
 
-const addToCart = (req, res, next) => {
-        // Find product by ID
-        mongoose.connect(config.mongoConfigs.db);
-        Product.findOne({_id: req.body.productId})
-                .then((result) => {
-                        mongoose.disconnect();
-                        if (!req.session.products) {
-                                req.session.products = [];
-                        }
-                        req.session.products.push({
-                                product: result,
-                                customization: req.body.customization,
-                                quantity: Number(req.body.quantity)
-                        });
-                        // res.status(200);
-                        res.render('cart.hbs',
-                                {product: result, session: req.session});
-                        // res.json({
-                        //         "message": "Product added to cart",
-                        //         "success": true,
-                        //         "rawProduct": result,
-                        //         "customization": req.body.customization
-                        // });
-                })
-                .catch((err) => {
-                        mongoose.disconnect();
-                        console.log(err);
-                        res.status(500);
-                        res.json({
-                                "message": "Something went wrong",
-                                "success": false
-                        });
-                });
-};
-
+/* Find all products in db. Accepts callback as last arg to handle responses */
 const getProducts = (callback) => {
     mongoose.connect(config.mongoConfigs.db);
     Product.find({})
@@ -82,10 +49,11 @@ const getProducts = (callback) => {
         .catch((err) => {
             mongoose.disconnect();
             console.log(err);
-            callback({});
+            callback();
         });
 };
 
+/* Find one product by ID. Accepts callback as last arg to handle responses */
 const getProduct = (productId, callback) => {
     mongoose.connect(config.mongoConfigs.db);
     Product.findOne({_id: productId})
@@ -96,8 +64,27 @@ const getProduct = (productId, callback) => {
         .catch((err) => {
             mongoose.disconnect();
             console.log(err);
-            callback({});
+            callback();
         });
+};
+
+/**
+ * static method that adds products to a session-based cart. Accepts callback
+ * as last arg to handle responses. 
+ */
+const addToCart = (req, callback) => {
+    const productId = req.body.productId;
+    getProduct(productId, (result) => {
+        if (!req.session.products) {
+            req.session.products = [];
+        }
+        req.session.products.push({
+            product: result,
+            customization: req.body.customization,
+            quantity: Number(req.body.quantity)
+        });
+        callback(result);
+    });
 };
 
 module.exports = {

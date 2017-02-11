@@ -15,16 +15,16 @@
             <form class="account-contact-form">
                 <label>First Name</label>
                 <div class="form-group first-name">
-                    <input type="text" id="first-name" name="first-name" minlength="2" value="{{fName}}">
+                    <input type="text" id="first-name" name="first-name" minlength="2" value="{{result.fName}}">
                 </div>
                 <label>Last Name</label>
                 <div class="form-group last-name">
-                    <input type="text" id="last-name" name="last-name" value="{{lName}}" minlength="2" required>
+                    <input type="text" id="last-name" name="last-name" value="{{result.lName}}" minlength="2" required>
                 </div>
                 <label>Email Address</label>
                 <div class="form-group email">
                     <input type="email"  id="email"name="email" 
-                    value="{{email}}" minlength="5" required>
+                    value="{{result.email}}" minlength="5" required>
                 </div>
                 <button type="submit" class="btn btn-primary">
                     Update Info

@@ -5,28 +5,35 @@
             </div>
         </div>
         {{#each product}}
-                <div class="row">
-                    <h4 class="">{{name}}</h4>
-                    <div class="col-lg-2">
-                        <img src="{{image}}" alt="Product Img" height="160" width="120"/>
-                    </div>
-                    <div class="col-lg-2">
-                        <p>{{description}}</p>
-                    </div>
-                    <div class="col-lg-2">
-                        <p>Price: ${{price}}</p>
-                    </div>
-
-                    <div class="col-lg-2">
-                        <button class="addToCart">Add To Cart</button>
-                    </div>
-
+            <div class="row">
+                <h4 class="product-name">{{name}}</h4>
+                <div class="col-lg-2">
+                    <img class="product-image" src="{{image}}"
+                    alt="{{name}}" height="160" width="120"/>
                 </div>
-<hr />
-                <!-- <div><br />
-                    <button class="customize">Customize</button>
-                    <br />
-                </div> -->
+                <div class="col-lg-2">
+                    <p>{{description}}</p>
+                </div>
+                <div class="col-lg-2">
+                    <p>Price: ${{price}}</p>
+                </div>
+
+                <div class="col-lg-2">
+                    <button class="customize-button">Customize</button>
+                    <button class="addToCart">Add To Cart</button>
+                </div>
+                <div class="col-lg-4">
+                    <div>
+                        customization form goes here! People shouldn't be able to add to cart before they customize...we can do this with straight JS and Handlebars without helpers, but it may take some slight modification to the product model. Like so:
+                        <form class="customization-form">
+                            {{#each customization}}
+                                <input type="text" class="{{this}}-input" placeholder="{{description}}" required />
+                            {{/each}}
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <hr />
         {{/each}}
     </div>
 </div>

@@ -72,19 +72,16 @@ const addToCart = (req, res, next) => {
                 });
 };
 
-const viewAll = (req, res, next) => {
-    // find all products
+const getProducts = (callback) => {
     mongoose.connect(config.mongoConfigs.db);
     Product.find({})
         .then((result) => {
             mongoose.disconnect();
-            // res.json({
-            // "message": "Product page",
-            // "success": true,
-            // "Products": result
-            // });
-            // const products = {"products":result};
-            res.render('products.hbs',{product: result, session: req.session});
+            callback(result);
+        })
+        .catch((err) => {
+            console.log(err);
+            callback({});
         });
 };
 
@@ -104,6 +101,6 @@ const viewProduct = (req, res, next) => {
 module.exports = {
         "Product": Product,
         "addToCart": addToCart,
-        "viewAll": viewAll,
+        "getProducts": getProducts,
         "viewProduct": viewProduct
 };

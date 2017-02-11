@@ -19,7 +19,24 @@ router.post('/user/update', user.apiAuth, user.updateUser);
 /**
  * Product API routes
  */
-router.get('/products', product.viewAll);
+router.get('/products', (req, res, next) => {
+    product.getProducts((result) => {
+        if (result) {
+            res.json({
+                "message": "Retrieved all products",
+                "success": true,
+                "products": result
+            });
+        } else {
+            res.json({
+                "message": "Failed to retrieve products",
+                "success": false,
+                "products": []
+            });
+        }
+    });
+});
+
 router.get('/products/:productId', product.viewProduct);
 router.post('/cart', user.apiAuth, product.addToCart);
 

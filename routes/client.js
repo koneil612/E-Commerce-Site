@@ -36,7 +36,12 @@ router.get('/user/account', user.clientAuth, (req, res) => {
 /**
  * Product routes
  */
- router.get('/products', product.viewAll);
+ router.get('/products', (req, res) => {
+     product.getProducts((result) => {
+        res.render('products.hbs',{product: result, session: req.session});
+    });
+ });
+
  router.get('/products/:productId', (req, res) => {
      res.render("product.hbs", {session: req.session, products:"products"});
  });

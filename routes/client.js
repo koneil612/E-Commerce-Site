@@ -27,7 +27,6 @@ router.get('/user/account', user.clientAuth, (req, res) => {
     });
 });
 
-
 /**
  * Product routes
  */
@@ -40,11 +39,9 @@ router.get('/user/account', user.clientAuth, (req, res) => {
 /**
  * Order routes
  */
-
 router.get('/cart', product.addToCart);
 router.route('/cart/checkout')
     .get(user.clientAuth, order.getCart)
     .post(user.clientAuth, order.createOrder);
-
 
 module.exports = router;

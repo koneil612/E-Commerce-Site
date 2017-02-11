@@ -19,6 +19,8 @@ router.post('/user/update', user.apiAuth, user.updateUser);
 /**
  * Product API routes
  */
+
+/* Get all products */
 router.get('/products', (req, res, next) => {
     product.getProducts((result) => {
         if (result) {
@@ -37,7 +39,25 @@ router.get('/products', (req, res, next) => {
     });
 });
 
-router.get('/products/:productId', product.viewProduct);
+/* Get one product */
+router.get('/products/:productId', (req, res) => {
+    product.getProduct(req.params.productId, (result) => {
+        if (result) {
+            res.json({
+                "message": "Retrieved one product",
+                "success": true,
+                "product": result
+            });
+        } else {
+            res.json({
+                "message": "Failed to retrieve product",
+                "success": false,
+                "product": {}
+            });
+        }
+    });
+});
+
 router.post('/cart', user.apiAuth, product.addToCart);
 
 /**

@@ -42,10 +42,11 @@ router.get('/user/account', user.clientAuth, (req, res) => {
     });
  });
 
- router.get('/products/:productId', (req, res) => {
-     res.render("product.hbs", {session: req.session, products:"products"});
+ router.get('/products/:productId',(req, res) => {
+     product.getProduct(req.params.productId, (result) => {
+        res.render("product.hbs", {session: req.session, product: result});
+     });
  });
- router.get('/products/:productId',product.viewProduct);
 
 /**
  * Order routes

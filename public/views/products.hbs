@@ -24,10 +24,14 @@
                 </div>
                 <div class="col-lg-4">
                     <div>
-                        customization form goes here! People shouldn't be able to add to cart before they customize...we can do this with straight JS and Handlebars without helpers, but it may take some slight modification to the product model. Like so:
+                        customization form goes here! People shouldn't be able to add to cart before they customize...
+                        Also going to need quantity selector.
                         <form class="customization-form">
                             {{#each customization}}
-                                <input type="text" class="{{this}}-input" placeholder="{{description}}" required />
+                                <label>{{@key}}</label>
+                                <div class="form-group first-name">
+                                    <input type="text" class="{{@key}}-input" required />
+                                </div>
                             {{/each}}
                         </form>
                     </div>
@@ -37,7 +41,5 @@
         {{/each}}
     </div>
 </div>
-
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 <script src="../javascript/products.js"></script>

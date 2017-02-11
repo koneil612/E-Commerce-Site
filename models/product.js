@@ -80,27 +80,29 @@ const getProducts = (callback) => {
             callback(result);
         })
         .catch((err) => {
+            mongoose.disconnect();
             console.log(err);
             callback({});
         });
 };
 
-const viewProduct = (req, res, next) => {
-    // find products by ID
+const getProduct = (productId, callback) => {
     mongoose.connect(config.mongoConfigs.db);
-    Product.findOne({_id: req.params.productId})
-        .then((product) => {
+    Product.findOne({_id: productId})
+        .then((result) => {
             mongoose.disconnect();
-            console.log(product);
-            res.render('productid.hbs',
-                {product: product, session: req.session});
+            callback(result);
+        })
+        .catch((err) => {
+            mongoose.disconnect();
+            console.log(err);
+            callback({});
         });
-        //To-Do: error handling
 };
 
 module.exports = {
         "Product": Product,
         "addToCart": addToCart,
         "getProducts": getProducts,
-        "viewProduct": viewProduct
+        "getProduct": getProduct
 };

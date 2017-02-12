@@ -8,7 +8,7 @@ const router = require('express').Router();
 const user = require('../models/user');
 const product = require('../models/product');
 const order = require('../models/order');
-
+var stripe = require("stripe");
 /**
  * Homepage route
  */

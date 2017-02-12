@@ -23,6 +23,8 @@
         </div>
     <hr />
     <div class="row" id="cart-items">
+        {{#if products}}
+        {{#each products}}
                 <div class="col-lg-2" id="product-img">
                     <p><img src="http://placehold.it/50x50" alt="Product Img" /></p>
                 </div>
@@ -39,8 +41,10 @@
 
                 </div>
                 <div class="col-lg-2">
-                    <p>$24</p>
+                    <p>$({{this.price}}*quantity</p>
                 </div>
+                {{/each}}
+                {{/if}}
         </div>
     <hr />
     </div>
@@ -52,7 +56,7 @@
                     Subtotal: ---
                 </p>
                 <p>Shipping & Taxes calcualted at checkout</p>
-                <button id="updatecart">Update Cart</button><button id="checkout">Check Out</button>
+                <button id="updatecart">Update Cart</button><a href="/checkout" type="button" class="btn checkout">Check Out</a>
             </div>
     </div>
 </div>

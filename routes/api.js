@@ -79,7 +79,7 @@ router.post('/cart', (req, res) => {
 /**
  * Order routes
  */
-router.route('/cart/checkout')
+router.route('/checkout')
     .get(user.apiAuth, order.getCart)
     .post(user.apiAuth, order.createOrder);
 

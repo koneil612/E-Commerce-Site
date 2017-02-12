@@ -24,8 +24,9 @@ router.get('/user/signup', (req, res) => {
         res.render('signup.hbs', {session: req.session});
     }
 });
-router.get('/user/login', (req, res) => res.render('login.hbs', 
+router.get('/user/login', (req, res) => res.render('login.hbs',
     {session: req.session}));
+
 router.get('/user/account', user.clientAuth, (req, res) => {
     const userId = req.session.userId;
     user.getUser(userId, (result) => {
@@ -51,14 +52,17 @@ router.get('/user/account', user.clientAuth, (req, res) => {
 /**
  * Order routes
  */
-router.post('/cart', (req, res) => {
+router.get('/cart', (req, res) => {
     product.addToCart(req, (result) => {
         res.render('products.hbs', {product: result, session: req.session});
     });
 });
 
-router.route('/cart/checkout')
+router.route('/checkout')
     .get(user.clientAuth, order.getCart)
     .post(user.clientAuth, order.createOrder);
+
+// ********Need to add the client auth back into the car stuff. took it out. (user.clientAuth)
+
 
 module.exports = router;

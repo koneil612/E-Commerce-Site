@@ -1,10 +1,8 @@
-{{{cart}}}
-
 <div class="container-fluid" id="cart-container">
         <div class="row">
             <div class="col-lg-2"></div>
             <div class="col-lg-8">
-            <h3 class="">Your Cart</h3>
+            <h3 class="">Check Out</h3>
             </div>
         </div>
 <div class="container" id="shopping-cart">
@@ -23,16 +21,17 @@
         </div>
     <hr />
     <div class="row" id="cart-items">
+        {{order.product.}}
                 <div class="col-lg-2" id="product-img">
                     <p><img src="http://placehold.it/50x50" alt="Product Img" /></p>
                 </div>
                 <div class="col-lg-2" id="item-name">
-                    <p>{{this.name}}</p>
+                    <p>product name{{this.name}}</p>
                 </div>
                 <div class="col-lg-2">
                 </div>
                 <div class="col-lg-2" id = "price">
-                    <p>{{this.price}}</p>
+                    <p>price {{this.price}}</p>
                 </div>
                 <div class="col-lg-2" id="quantos">
                     <button id="increase-button">+</button><input class="quantity" id="quantity" value="1"><button id="decrease-button">-</button>

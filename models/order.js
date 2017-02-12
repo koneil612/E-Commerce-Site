@@ -112,11 +112,12 @@ const createOrder = (req, res, next) => {
             mongoose.disconnect();
             console.log(err);
             res.status(500);
-            res.json({
-                "message":"Server Error: order was not placed",
-                "success": false,
-                "data": ""
-            });
+            res.render('checkout.hbs',{"cart":result});
+            // res.json({
+            //     "message":"Server Error: order was not placed",
+            //     "success": false,
+            //     "data": ""
+            // });
         });
 };
 
